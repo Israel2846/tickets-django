@@ -1,12 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'Semantic-UI-CSS-master/semantic.min.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'Semantic-UI-CSS-master/semantic.min.js' %}"></script>
 </head>
 <body>
     <!-- Start Menú -->
@@ -41,10 +42,6 @@
         </div>
     </div>
     <!-- End Menú -->
-    <script>
-        $('.ui.dropdown').dropdown({
-            on: 'hover', // Esto activará el despliegue automático cuando se pase el ratón por encima
-        });
-    </script>
+    <script src="{% static 'js/base.js' %}"></script>
 </body>
 </html>
