@@ -4,8 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
 </head>
 <body>
-    <h1>Index</h1>
+    <!-- Start Menú -->
+    <div class="ui secondary  menu">
+        <a class="item">Inicio</a>
+        <a class="item">Nuevo Ticket</a>
+        <div class="item">
+            <div class="ui pointing dropdown link item">
+                Mantenimiento
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a class="item" href="#">Usuario</a>
+                    <a class="item" href="#">Prioridad</a>
+                    <a class="item" href="#">Categoría</a>
+                    <a class="item" href="#">SubCategoría</a>
+                </div>
+            </div>
+        </div>
+        <a class="item">Consultar Ticket</a>
+        <div class="right menu">
+            <div class="ui item">
+                <div class="ui pointing dropdown link item">
+                    <i class="user  icon"></i>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" href="#">Perfil</a>
+                        <a class="item" href="#">Ayuda</a>
+                        <a class="item" href="#">Cerrar sesión</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Menú -->
+    <script>
+        $('.ui.dropdown').dropdown({
+            on: 'hover', // Esto activará el despliegue automático cuando se pase el ratón por encima
+        });
+    </script>
 </body>
 </html>
