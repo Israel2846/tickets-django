@@ -121,7 +121,7 @@ STATIC_URL = 'static/'
 
 # Rutas de directorios donde se encuentran los archivos estáticos
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'tickets/static'),
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
