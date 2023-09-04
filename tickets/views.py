@@ -20,7 +20,7 @@ def categoría(request):
     return render(request, 'categoría/index.html', {'formulario' : CategoríaForm, 'mensaje' : mensaje,'categorías' : categorías,})
 
 
-def editar_eliminar(request, id):
+def editar_eliminar_categoría(request, id):
     mensaje = None
     categoría = Categoría.objects.get(pk = id)
     formulario = CategoríaForm(instance=categoría)
