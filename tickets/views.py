@@ -37,3 +37,48 @@ def editar_eliminar_categoría(request, id):
         except Exception as e:
             mensaje = str(e)
     return render(request, 'categoría/editar-eliminar.html', {'mensaje' : mensaje,'formulario' : formulario,})
+
+
+def subcategoría(request):
+    mensaje = None
+    if request.POST:
+        try:
+            formulario = SubCategoríaForm(request.POST)
+            if formulario.is_valid():
+                formulario.save()
+        except Exception as e:
+            mensaje = str(e)
+    subcategorías = SubCategoría.objects.all()
+    return render(request, 'subcategoría/index.html', {'formulario' : SubCategoríaForm, 'mensaje' : mensaje,'subcategorías' : subcategorías,})
+
+
+def prioridad(request):
+    mensaje = None
+    if request.POST:
+        try:
+            formulario = PrioridadForm(request.POST)
+            if formulario.is_valid():
+                formulario.save()
+        except Exception as e:
+            mensaje = str(e)
+    prioridades = Prioridad.objects.all()
+    return render(request, 'prioridad/index.html', {'formulario' : PrioridadForm, 'mensaje' : mensaje,'prioridades' : prioridades,})
+
+
+def editar_eliminar_prioridad(request, id):
+    mensaje = None
+    prioridad = Prioridad.objects.get(pk = id)
+    formulario = PrioridadForm(instance=prioridad)
+    if request.POST:
+        try:
+            accion = request.POST.get('acciones')
+            if accion == 'editar':            
+                formulario = PrioridadForm(request.POST, instance=prioridad)
+                if formulario.is_valid():
+                    formulario.save()
+            elif accion == 'eliminar':
+                prioridad.delete()
+            return redirect('Prioridad')
+        except Exception as e:
+            mensaje = str(e)
+    return render(request, 'prioridad/editar-eliminar.html', {'mensaje' : mensaje,'formulario' : formulario,})

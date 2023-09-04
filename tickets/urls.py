@@ -6,4 +6,7 @@ urlpatterns = [
     path('', views.index, name='Index'),
     path('categoría', views.categoría, name='Categoría'),
     path('categoría/editar-eliminar/<int:id>', views.editar_eliminar_categoría, name='Editar/Eliminar categoría'),
+    path('prioridad', views.prioridad, name='Prioridad'),
+    path('prioridad/editar-eliminar/<int:id>', views.editar_eliminar_prioridad, name='Editar/Eliminar prioridad'),
+    path('subcategoría', views.subcategoría, name='Subcategoría'),
 ]

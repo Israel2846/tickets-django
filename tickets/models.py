@@ -6,6 +6,9 @@ class Categoría(models.Model):
     id_categoría = models.AutoField(verbose_name='Id categoría', primary_key=True)
     nombre_cat = models.CharField(verbose_name='Nombre de categoría', max_length=50)
 
+    def __str__(self) -> str:
+        return self.nombre_cat
+
 
 class SubCategoría(models.Model):
     id_subcategoría = models.AutoField(verbose_name='Id sugcategoría', primary_key=True)
@@ -15,7 +18,7 @@ class SubCategoría(models.Model):
 
 class Prioridad(models.Model):
     id_prioridad = models.AutoField(verbose_name='Id de prioridad', primary_key=True)
-    nombre = models.CharField(verbose_name='Nombre de prioridad', max_length=50)
+    nombre_prioridad = models.CharField(verbose_name='Nombre de prioridad', max_length=50)
 
 
 class Ticket(models.Model):

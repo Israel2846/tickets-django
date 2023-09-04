@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Crear subcategoría{% endblock %}
+{% block content %}
+<div class="ui blue ribbon label"><h3>Crear subcategoría</h3></div>
+<span></span>
+<p></p>
+
+{% if mensaje %}
+<label for="{{mensaje}}" style="color: red;">{{mensaje}}</label>
+{% endif %}
+
+<form class="ui fluid form" method="post">
+    {% csrf_token %}
+    {{formulario}}
+    <p></p>
+    <button class="ui fluid blue button" type="submit">Alta</button>
+</form>
+<p></p>
+
+<div class="ui blue ribbon label"><h3>Lista de SubCategorías</h3></div>
+<span></span>
+<p></p>
+
+<div class="ui fluid form">
+    <div style="overflow-x: auto; height: 300px">
+        <table class="ui unstackable celled striped table">
+            <thead>
+                <tr>
+                    <th class="collapsing">Id</th>
+                    <th>Nombre</th>
+                    <th class="right aligned collapsing" style="text-align: center;">Seleccionar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subcategoría in subcategorías %}
+                <tr>
+                    <td>{{subcategoría.id_subcategoría}}</td>
+                    <td>{{subcategoría.nombre_subCat}}</td>
+                    <td>
+                        <a class="ui blue button" href="#">Seleccionar</i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>        
+    </div>
+</div>
+
+{% endblock %}
