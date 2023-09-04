@@ -17,7 +17,7 @@ def categoría(request):
         except Exception as e:
             mensaje = str(e)
     categorías = Categoría.objects.all()
-    return render(request, 'tickets/categoría.html', {'formulario' : CategoríaForm, 'mensaje' : mensaje,'categorías' : categorías,})
+    return render(request, 'categoría/index.html', {'formulario' : CategoríaForm, 'mensaje' : mensaje,'categorías' : categorías,})
 
 
 def editar_eliminar(request, id):
@@ -36,4 +36,4 @@ def editar_eliminar(request, id):
             return redirect('Categoría')
         except Exception as e:
             mensaje = str(e)
-    return render(request, 'tickets/editar-eliminar.html', {'mensaje' : mensaje,'formulario' : formulario,})
+    return render(request, 'categoría/editar-eliminar.html', {'mensaje' : mensaje,'formulario' : formulario,})
