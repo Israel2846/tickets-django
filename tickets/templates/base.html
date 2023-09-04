@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% static 'Semantic-UI-CSS-master/semantic.min.css' %}">
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'Semantic-UI-CSS-master/semantic.min.js' %}"></script>
@@ -21,7 +21,7 @@
                 <div class="menu">
                     <a class="item" href="#">Usuario</a>
                     <a class="item" href="#">Prioridad</a>
-                    <a class="item" href="#">Categoría</a>
+                    <a class="item" href="{% url 'Categoría' %}">Categoría</a>
                     <a class="item" href="#">SubCategoría</a>
                 </div>
             </div>
@@ -42,6 +42,12 @@
         </div>
     </div>
     <!-- End Menú -->
+
+    <!-- Start Contenido de página -->
+    <div class="ui segment container">
+        {% block content %}{% endblock %}
+    </div>
+    <!-- End Contenido de página -->
     <script src="{% static 'js/base.js' %}"></script>
 </body>
 </html>
