@@ -82,3 +82,22 @@ def editar_eliminar_prioridad(request, id):
         except Exception as e:
             mensaje = str(e)
     return render(request, 'prioridad/editar-eliminar.html', {'mensaje' : mensaje,'formulario' : formulario,})
+
+
+def cargar_subcategorías(request):
+    id_categoría = request.GET.get('id_categoría')
+    print(id_categoría)
+    subcategorías = SubCategoría.objects.filter(id_categoría=id_categoría).values('id_subcategoría', 'nombre_subCat')
+    print(subcategorías)
+    return JsonResponse(list(subcategorías), safe=False)
+
+
+def crear_ticket(request):
+    if request.method == 'POST':
+        form = TicketForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('Index')
+    else:
+        form = TicketForm()
+    return render(request, 'ticket/crear_ticket.html', {'form': form})

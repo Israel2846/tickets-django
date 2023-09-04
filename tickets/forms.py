@@ -24,3 +24,16 @@ class PrioridadForm(forms.ModelForm):
     class Meta:
         model = Prioridad
         fields = ['nombre_prioridad']
+
+
+class TicketForm(forms.ModelForm):
+    categoría = forms.ModelChoiceField(
+        queryset=Categoría.objects.all(),
+    )
+    
+    subcategoría = forms.ModelChoiceField(
+        queryset=SubCategoría.objects.none(),
+    )
+    class Meta:
+        model = Ticket
+        fields = ['id_prioridad', 'documentos_adicionales', 'descripción']
