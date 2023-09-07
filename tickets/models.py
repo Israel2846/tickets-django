@@ -11,7 +11,7 @@ class Categoría(models.Model):
 
 
 class SubCategoría(models.Model):
-    id_subcategoría = models.AutoField(verbose_name='Id sugcategoría', primary_key=True)
+    id_subcategoría = models.AutoField(verbose_name='Id subcategoría', primary_key=True)
     id_categoría = models.ForeignKey(Categoría, on_delete=models.CASCADE)
     nombre_subCat = models.CharField(verbose_name='Nombre de subcategoría', max_length=50)
 
@@ -35,8 +35,8 @@ class Ticket(models.Model):
         ('pausado', 'Pausado'),
     )
     id_ticket = models.AutoField(verbose_name='Id de ticket', primary_key=True)
-    id_categoría = models.ForeignKey(Categoría, on_delete=models.CASCADE)
-    id_subcategoría = models.ForeignKey(SubCategoría, on_delete=models.CASCADE)
+    id_categoría = models.ForeignKey(Categoría, on_delete=models.CASCADE, verbose_name='Categoría')
+    id_subcategoría = models.ForeignKey(SubCategoría, on_delete=models.CASCADE, verbose_name='Subcategoría')
     id_prioridad = models.ForeignKey(Prioridad, on_delete=models.CASCADE, verbose_name='Prioridad')
     descripción = models.TextField(verbose_name='Descripción')
     fecha_inicio = models.DateTimeField(verbose_name='Fecha de inicio', auto_now_add=True)

@@ -13,12 +13,6 @@ class SubCategoríaForm(forms.ModelForm):
         model = SubCategoría
         fields = ['id_categoría', 'nombre_subCat']
 
-    id_categoría = forms.ModelChoiceField(
-        queryset=Categoría.objects.all(),
-        empty_label="Seleccione una categoría",
-        widget=forms.Select(attrs={'class': 'tu-clase-css-aqui'})
-    )
-
 
 class PrioridadForm(forms.ModelForm):
     class Meta:
@@ -27,13 +21,6 @@ class PrioridadForm(forms.ModelForm):
 
 
 class TicketForm(forms.ModelForm):
-    categoría = forms.ModelChoiceField(
-        queryset=Categoría.objects.all(),
-    )
-    
-    subcategoría = forms.ModelChoiceField(
-        queryset=SubCategoría.objects.none(),
-    )
     class Meta:
         model = Ticket
-        fields = ['id_prioridad', 'documentos_adicionales', 'descripción']
+        fields = ['id_prioridad', 'documentos_adicionales', 'descripción', 'id_categoría', 'id_subcategoría']
