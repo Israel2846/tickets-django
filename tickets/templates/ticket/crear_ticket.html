@@ -13,37 +13,37 @@
 <form method="post" enctype="multipart/form-data" class="ui fluid form">
     {% csrf_token %}
     <div class="field">
-        {{form.id_prioridad.label}}
-        <select name="{{form.id_prioridad.name}}" id="{{form.id_prioridad.id}}" class="ui dropdown" required>
-            {% for choice in form.id_prioridad.field.choices %}
-            <option value="{{ choice.0 }}"{% if choice.0 == form.id_prioridad.value %} selected{% endif %}>{{ choice.1 }}</option>
+        {{formulario.id_prioridad.label}}
+        <select name="{{formulario.id_prioridad.name}}" id="{{formulario.id_prioridad.id}}" class="ui dropdown" required>
+            {% for choice in formulario.id_prioridad.field.choices %}
+            <option value="{{ choice.0 }}"{% if choice.0 == formulario.id_prioridad.value %} selected{% endif %}>{{ choice.1 }}</option>
             {% endfor %}
         </select>
     </div>
     <div class="field">
-        {{form.documentos_adicionales.label}}
-        {{form.documentos_adicionales}}
+        {{formulario.documentos_adicionales.label}}
+        {{formulario.documentos_adicionales}}
     </div>
     <div class="field">
-        {{form.id_categoría.label}}
-        <select required name="{{form.id_categoría.name}}" id="id_id_categoría" class="ui dropdown">
-            {% for choice in form.id_categoría.field.choices %}
-            <option value="{{ choice.0 }}"{% if choice.0 == form.id_categoría.value %} selected{% endif %}>{{ choice.1 }}</option>
+        {{formulario.id_categoría.label}}
+        <select required name="{{formulario.id_categoría.name}}" id="id_id_categoría" class="ui dropdown">
+            {% for choice in formulario.id_categoría.field.choices %}
+            <option value="{{ choice.0 }}"{% if choice.0 == formulario.id_categoría.value %} selected{% endif %}>{{ choice.1 }}</option>
             {% endfor %}
         </select>
     </div>
     <div class="field">
-        {{form.id_subcategoría.label}}
-        <select name="{{form.id_subcategoría.name}}" required id="id_id_subcategoría" class="ui dropdown">
+        {{formulario.id_subcategoría.label}}
+        <select name="{{formulario.id_subcategoría.name}}" required id="id_id_subcategoría" class="ui dropdown">
             <option value="">Escoje una opción</option>
-            {% for choice in form.id_subcategoría.field.choices %}
-            <option value="{{ choice.0 }}"{% if choice.0 == form.id_subcategoría.value %} selected{% endif %}>{{ choice.1 }}</option>
+            {% for choice in formulario.id_subcategoría.field.choices %}
+            <option value="{{ choice.0 }}"{% if choice.0 == formulario.id_subcategoría.value %} selected{% endif %}>{{ choice.1 }}</option>
             {% endfor %}
         </select>
     </div>
     <div class="field">
-        {{form.descripción.label}}
-        {{form.descripción}}
+        {{formulario.descripción.label}}
+        {{formulario.descripción}}
     </div>
     <p></p>
     <button type="submit" class="ui fluid blue button">Guardar</button>

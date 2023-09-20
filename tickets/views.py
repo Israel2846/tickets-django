@@ -102,4 +102,4 @@ def crear_ticket(request):
                 return redirect('Index')
         except Exception as e:
             mensaje = str(e)
-    return render(request, 'ticket/crear_ticket.html', {'form': TicketForm, 'mensaje' : mensaje})
+    return render(request, 'ticket/crear_ticket.html', {'formulario': TicketForm, 'mensaje' : mensaje})

@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+$(document).ready(function() {
     let btnEliminar = document.getElementById('btnEliminar').addEventListener('click', function() {
             $('.ui.modal').modal('show');
     })
