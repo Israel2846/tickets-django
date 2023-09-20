@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bd_django',
+        'NAME': 'tickets_django',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',  # O la dirección IP del servidor MySQL
