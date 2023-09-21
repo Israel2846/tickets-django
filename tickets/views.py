@@ -94,7 +94,7 @@ def cargar_subcategorías(request):
 
 def editar_eliminar_subcategoría(request, id):
     mensaje = None
-    subcategoria = SubCategoría.objects.get(pk = id)
+    subcategoría = SubCategoría.objects.get(pk = id)
     if request.POST:
         try:
             accion = request.POST.get('acciones')
@@ -102,10 +102,11 @@ def editar_eliminar_subcategoría(request, id):
                 formulario = SubCategoríaForm(request.POST, instance=subcategoría)
                 if formulario.is_valid():
                     formulario.save()
+            return redirect('subcategoría')
         except Exception as e:
             mensaje = str(e)
     else:
-        formulario = SubCategoríaForm(instance=subcategoria)
+        formulario = SubCategoríaForm(instance=subcategoría)
     return render(request, 'subcategoría/editar-eliminar.html', {'mensaje' : mensaje, 'formulario' : formulario})
 
 
