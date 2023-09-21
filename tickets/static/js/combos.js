@@ -3,7 +3,6 @@ $(document).ready(function() {
         const id_categoría = $(this).val();
         const subcategoríaSelect = $('#id_id_subcategoría');
         subcategoríaSelect.dropdown('clear')
-        subcategoríaSelect.empty()
         console.log('Categoría seleccionada:', id_categoría);
         $.ajax({
             url: 'cargar_subcategorias',

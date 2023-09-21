@@ -52,6 +52,32 @@ def subcategoría(request):
     return render(request, 'subcategoría/index.html', {'formulario' : SubCategoríaForm, 'mensaje' : mensaje,'subcategorías' : subcategorías,})
 
 
+def cargar_subcategorías(request):
+    id_categoría = request.GET.get('id_categoría')
+    print(id_categoría)
+    subcategorías = SubCategoría.objects.filter(id_categoría=id_categoría).values('nombre_subCat', 'id_subcategoría')
+    print(subcategorías)
+    return JsonResponse(list(subcategorías), safe=False)
+
+
+def editar_eliminar_subcategoría(request, id):
+    mensaje = None
+    subcategoría = SubCategoría.objects.get(pk = id)
+    if request.POST:
+        try:
+            accion = request.POST.get('acciones')
+            if accion == 'editar':
+                formulario = SubCategoríaForm(request.POST, instance=subcategoría)
+                if formulario.is_valid():
+                    formulario.save()
+            return redirect('Subcategoría')
+        except Exception as e:
+            mensaje = str(e)
+    else:
+        formulario = SubCategoríaForm(instance=subcategoría)
+    return render(request, 'subcategoría/editar-eliminar.html', {'mensaje' : mensaje, 'formulario' : formulario})
+
+
 def prioridad(request):
     mensaje = None
     if request.POST:
@@ -82,32 +108,6 @@ def editar_eliminar_prioridad(request, id):
         except Exception as e:
             mensaje = str(e)
     return render(request, 'prioridad/editar-eliminar.html', {'mensaje' : mensaje,'formulario' : formulario,})
-
-
-def cargar_subcategorías(request):
-    id_categoría = request.GET.get('id_categoría')
-    print(id_categoría)
-    subcategorías = SubCategoría.objects.filter(id_categoría=id_categoría).values('nombre_subCat', 'id_subcategoría')
-    print(subcategorías)
-    return JsonResponse(list(subcategorías), safe=False)
-
-
-def editar_eliminar_subcategoría(request, id):
-    mensaje = None
-    subcategoría = SubCategoría.objects.get(pk = id)
-    if request.POST:
-        try:
-            accion = request.POST.get('acciones')
-            if accion == 'editar':
-                formulario = SubCategoríaForm(request.POST, instance=subcategoría)
-                if formulario.is_valid():
-                    formulario.save()
-            return redirect('Subcategoría')
-        except Exception as e:
-            mensaje = str(e)
-    else:
-        formulario = SubCategoríaForm(instance=subcategoría)
-    return render(request, 'subcategoría/editar-eliminar.html', {'mensaje' : mensaje, 'formulario' : formulario})
 
 
 def crear_ticket(request):
