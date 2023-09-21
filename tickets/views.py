@@ -102,7 +102,7 @@ def editar_eliminar_subcategoría(request, id):
                 formulario = SubCategoríaForm(request.POST, instance=subcategoría)
                 if formulario.is_valid():
                     formulario.save()
-            return redirect('subcategoría')
+            return redirect('Subcategoría')
         except Exception as e:
             mensaje = str(e)
     else:
