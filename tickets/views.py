@@ -92,6 +92,23 @@ def cargar_subcategorías(request):
     return JsonResponse(list(subcategorías), safe=False)
 
 
+def editar_eliminar_subcategoría(request, id):
+    mensaje = None
+    subcategoria = SubCategoría.objects.get(pk = id)
+    if request.POST:
+        try:
+            accion = request.POST.get('acciones')
+            if accion == 'editar':
+                formulario = SubCategoríaForm(request.POST, instance=subcategoría)
+                if formulario.is_valid():
+                    formulario.save()
+        except Exception as e:
+            mensaje = str(e)
+    else:
+        formulario = SubCategoríaForm(instance=subcategoria)
+    return render(request, 'subcategoría/editar-eliminar.html', {'mensaje' : mensaje, 'formulario' : formulario})
+
+
 def crear_ticket(request):
     mensaje = None
     if request.POST:

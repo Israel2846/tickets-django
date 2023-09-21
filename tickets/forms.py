@@ -12,6 +12,10 @@ class SubCategoríaForm(forms.ModelForm):
     class Meta:
         model = SubCategoría
         fields = ['id_categoría', 'nombre_subCat']
+    id_categoría = forms.ModelChoiceField(
+        queryset=Categoría.objects.all(),
+        widget=forms.Select(attrs={'class': 'ui dropdown'})
+    )
 
 
 class PrioridadForm(forms.ModelForm):

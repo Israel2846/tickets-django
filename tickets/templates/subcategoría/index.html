@@ -51,7 +51,7 @@
                     <td>{{subcategoría.nombre_subCat}}</td>
                     <td>{{subcategoría.id_categoría.nombre_cat}}</td>
                     <td>
-                        <a class="ui blue button" href="#">Seleccionar</i></a>
+                        <a class="ui blue button" href="{% url 'Editar/Eliminar subcategoría' subcategoría.id_subcategoría %}">Seleccionar</i></a>
                     </td>
                 </tr>
                 {% endfor %}

@@ -9,6 +9,7 @@ urlpatterns = [
     path('prioridad', views.prioridad, name='Prioridad'),
     path('prioridad/editar-eliminar/<int:id>', views.editar_eliminar_prioridad, name='Editar/Eliminar prioridad'),
     path('subcategoría', views.subcategoría, name='Subcategoría'),
+    path('subcategoría/editar-eliminar/<int:id>', views.editar_eliminar_subcategoría, name='Editar/Eliminar subcategoría'),
     path('cargar_subcategorias', views.cargar_subcategorías, name='Cargar subcategoría'),
     path('crear_ticket', views.crear_ticket, name='Crear ticket'),
 ]

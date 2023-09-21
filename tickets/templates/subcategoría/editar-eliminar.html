@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Editar/Eliminar SubCategoría{% endblock %}
+{% block content %}
+<div class="ui blue ribbon label"><h3>Editar/Eliminar SubCategoría</h3></div>
+<span></span>
+<p></p>
+
+{% if mensaje %}
+<label for="{{mensaje}}" style="color: red;">{{mensaje}}</label>
+{% endif %}
+
+<form class="ui fluid form" id="formulario" method="post">
+    {% csrf_token %}
+    <div class="two fields">
+        <div class="field">
+            {{formulario.id_categoría.label}}
+            {{formulario.id_categoría}}
+            <p></p>
+            {{formulario.nombre_subCat.label}}
+            {{formulario.nombre_subCat}}
+            <p></p>
+            <div class="field">
+                <button type="submit" class="ui fluid blue button" name="acciones" value="editar">Modificar</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
