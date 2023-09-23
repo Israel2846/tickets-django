@@ -7,9 +7,7 @@ $(document).ready(function() {
         console.log('Categoría seleccionada:', id_categoría);
         $.ajax({
             url: 'cargar_subcategorias',
-            data: {
-                'id_categoría': id_categoría
-            },
+            data: { 'id_categoría': id_categoría },
             dataType: 'json',
             success: function(data) {
                 console.log(data);
