@@ -26,7 +26,7 @@
     </div>
     <div class="field">
         {{formulario.id_categoría.label}}
-        <select required name="{{formulario.id_categoría.name}}" id="id_id_categoría" class="ui dropdown">
+        <select required name="{{formulario.id_categoría.name}}" id="id_categoría" class="ui dropdown">
             {% for choice in formulario.id_categoría.field.choices %}
             <option value="{{ choice.0 }}"{% if choice.0 == formulario.id_categoría.value %} selected {% endif %}>{{ choice.1 }}</option>
             {% endfor %}
@@ -34,11 +34,7 @@
     </div>
     <div class="field">
         {{formulario.id_subcategoría.label}}
-        <select name="{{formulario.id_subcategoría.name}}" required id="id_id_subcategoría" class="ui dropdown">
-            <!-- <option value="">Escoje una opción</option>
-            {% for choice in formulario.id_subcategoría.field.choices %}
-            <option value="{{ choice.0 }}"{% if choice.0 == formulario.id_subcategoría.value %} selected{% endif %}>{{ choice.1 }}</option>
-            {% endfor %} -->
+        <select name="{{formulario.id_subcategoría.name}}" required id="id_subcategoría" class="ui dropdown">
         </select>
     </div>
     <div class="field">

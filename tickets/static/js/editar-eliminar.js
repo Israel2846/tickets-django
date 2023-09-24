@@ -1,6 +1,6 @@
 $(document).ready(function() {
     document.getElementById('btnEliminar').addEventListener('click', function() {
-            $('.ui.modal').modal('show');
+        $('.ui.modal').modal('show');
     })
 
     document.getElementById('btnModal').addEventListener('click', function() {
