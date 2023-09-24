@@ -42,7 +42,7 @@ class Ticket(models.Model):
     fecha_inicio = models.DateTimeField(verbose_name='Fecha de inicio', auto_now_add=True)
     fecha_fin = models.DateTimeField(verbose_name='Fecha de finalización', null=True, blank=True)
     tiempo_resolución = models.DurationField(null=True, blank=True)
-    documentos_adicionales = models.FileField(upload_to='documentos/')
+    documentos_adicionales = models.FileField(upload_to='documentos/', blank=True)
     estado = models.CharField(verbose_name='Estado', max_length=50, choices=ESTADO_CHOICES, default='abierto')
 
     def cerrar_tarea(self):
