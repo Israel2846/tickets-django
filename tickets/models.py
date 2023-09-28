@@ -29,10 +29,10 @@ class Prioridad(models.Model):
 
 class Ticket(models.Model):
     ESTADO_CHOICES = (
-        ('abierto', 'Abierto'),
-        ('en_progreso', 'En Progreso'),
-        ('completado', 'Completado'),
-        ('pausado', 'Pausado'),
+        (1, 'Abierto'),
+        (2, 'En Progreso'),
+        (3, 'Completado'),
+        (4, 'Pausado'),
     )
     id_ticket = models.AutoField(verbose_name='Id de ticket', primary_key=True)
     id_categoría = models.ForeignKey(Categoría, on_delete=models.CASCADE, verbose_name='Categoría')
@@ -43,11 +43,11 @@ class Ticket(models.Model):
     fecha_fin = models.DateTimeField(verbose_name='Fecha de finalización', null=True, blank=True)
     tiempo_resolución = models.DurationField(null=True, blank=True)
     documentos_adicionales = models.FileField(upload_to='documentos/', blank=True)
-    estado = models.CharField(verbose_name='Estado', max_length=50, choices=ESTADO_CHOICES, default='abierto')
+    estado = models.IntegerField(verbose_name='Estado', choices=ESTADO_CHOICES, default=1)
 
     def cerrar_tarea(self):
-        if self.estado != 'cerrado':
-            self.estado = 'cerrado'
+        if self.estado != 3:
+            self.estado = 3
             self.fecha_fin = timezone.now()
             self.duracion = self.fecha_fin - self.fecha_inicio  # Calcula la duración
             self.save()

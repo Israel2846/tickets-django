@@ -42,7 +42,15 @@
             <td>{{ticket.id_prioridad}}</td>
             <td>{{ticket.id_categoría}}</td>
             <td>{{ticket.id_subcategoría}}</td>
-            <td>{{ticket.estado}}</td>
+            {% if ticket.estado == 1 %}
+            <td>Abierto</td>
+            {% elif ticket.estado == 2 %}
+            <td>En Progreso</td>
+            {% elif ticket.estado == 3 %}
+            <td>Completado</td>
+            {% elif ticket.estado == 4 %}
+            <td>Pausado</td>
+            {% endif %}
             <td><a class="ui blue fluid icon button" href="{% url 'Detalle ticket' ticket.id_ticket %}"><i class="eye icon"></i></a></td>
         </tr>
         {% endfor %}

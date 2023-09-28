@@ -41,6 +41,14 @@
         {{formulario.descripción.label}}
         {{formulario.descripción}}
     </div>
+    <div class="field">
+        {{formulario.estado.label}}
+        <select required name="{{formulario.estado.name}}" class="ui dropdown">
+            {% for choice in formulario.estado.field.choices %}
+            <option value="{{choice.0}}">{{choice.1}}</option>
+            {% endfor %}
+        </select>
+    </div>
     <p></p>
     <button type="submit" class="ui fluid blue button">Guardar</button>
 </form>

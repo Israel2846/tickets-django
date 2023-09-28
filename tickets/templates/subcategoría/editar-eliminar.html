@@ -2,14 +2,19 @@
 {% load static %}
 {% block title %}Editar/Eliminar SubCategoría{% endblock %}
 {% block content %}
+<!-- Nombre de la página en bandera azul -->
 <div class="ui blue ribbon label"><h3>Editar/Eliminar SubCategoría</h3></div>
 <span></span>
 <p></p>
+<!-- End nombre de la página -->
 
+<!-- Mensaje de error en caso de que hubiera uno -->
 {% if mensaje %}
 <label for="{{mensaje}}" style="color: red;">{{mensaje}}</label>
 {% endif %}
+<!-- End mensaje de error -->
 
+<!-- Formulario de envío de datos -->
 <form class="ui fluid form" id="formulario" method="post">
     {% csrf_token %}
     <div class="two fields">
@@ -24,11 +29,35 @@
             {{formulario.nombre_subCat.label}}
             {{formulario.nombre_subCat}}
             <p></p>
+            <div class="two fields">
+                <div class="field">
+                    <button type="submit" class="ui fluid blue button" name="acciones" value="editar">Editar</button>
+                </div>
+                <div class="field">
+                    <button type="button" class="ui fluid red button" id="btnEliminar">Eliminar</button>
+                </div>
+            </div>
             <div class="field">
-                <button type="submit" class="ui fluid blue button" name="acciones" value="editar">Modificar</button>
+                <button type="submit" style="display: none;" name="acciones" value="eliminar"></button>
             </div>
         </div>
     </div>
 </form>
+<!-- End formulario de envío de datos -->
+
+<!-- Ventana modal para confirmar la eliminación de un dato en la base de datos -->
+<div class="ui modal">
+    <div class="header">Eliminar</div>
+    <div class="content">
+        Seguro que quieres eliminar este elemento?
+    </div>
+    <div class="actions">
+        <div class="ui green button" id="btnModal">Aceptar</div>
+        <div class="ui red button" id="btnCancelar">Cancelar</div>
+    </div>
+</div>
+<!-- End ventana modal -->
+
+<script src="{% static 'js/editar-eliminar.js' %}"></script>
 
 {% endblock %}
