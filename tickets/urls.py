@@ -11,5 +11,7 @@ urlpatterns = [
     path('subcategoría', views.subcategoría, name='Subcategoría'),
     path('subcategoría/editar-eliminar/<int:id>', views.subcategoría, name='Editar/Eliminar subcategoría'),
     path('cargar_subcategorias', views.cargar_subcategorías, name='Cargar subcategoría'),
-    path('crear_ticket', views.crear_ticket, name='Crear ticket'),
+    path('crear_ticket', views.ticket, name='Crear ticket'),
+    path('consultar_tickets', views.consultar_tickets, name='Consultar tickets'),
+    path('detalle_ticket/<int:id>', views.ticket, name='Detalle ticket'),
 ]

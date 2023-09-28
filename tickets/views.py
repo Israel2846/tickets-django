@@ -105,14 +105,21 @@ def prioridad(request, id = None):
         return render(request, 'prioridad/index.html', {'formulario' : PrioridadForm, 'mensaje' : mensaje,'prioridades' : prioridades,})
 
 
-def crear_ticket(request):
+def ticket(request, id = None):
+    if id:
+        pass
     mensaje = None
     if request.POST:
         try:
-            form = TicketForm(request.POST, request.FILES)
-            if form.is_valid():
-                form.save()
+            formulario = TicketForm(request.POST, request.FILES)
+            if formulario.is_valid():
+                formulario.save()
                 return redirect('Index')
         except Exception as e:
             mensaje = str(e)
     return render(request, 'ticket/crear_ticket.html', {'formulario': TicketForm, 'mensaje' : mensaje})
+
+
+def consultar_tickets(request):
+    tickets = Ticket.objects.all()
+    return render(request, 'ticket/consultar_tickets.html', {'tickets' : tickets})

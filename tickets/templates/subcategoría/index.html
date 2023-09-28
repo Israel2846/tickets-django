@@ -16,7 +16,7 @@
         {{formulario.id_categoría.label}}
         <select name="{{formulario.id_categoría.name}}" id="selectCategoría" class="ui dropdown" required>
             {% for choice in formulario.id_categoría.field.choices %}
-            <option value="{{choice.0}}"{% if choice.0 == formulario.id_categoría.value %} selected {% endif %}>{{choice.1}}</option>
+            <option value="{{choice.0}}">{{choice.1}}</option>
             {% endfor %}
         </select>
     </div>

@@ -16,7 +16,7 @@
         {{formulario.id_prioridad.label}}
         <select name="{{formulario.id_prioridad.name}}" id="{{formulario.id_prioridad.id}}" class="ui dropdown" required>
             {% for choice in formulario.id_prioridad.field.choices %}
-            <option value="{{ choice.0 }}"{% if choice.0 == formulario.id_prioridad.value %} selected{% endif %}>{{ choice.1 }}</option>
+            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
             {% endfor %}
         </select>
     </div>
@@ -28,7 +28,7 @@
         {{formulario.id_categoría.label}}
         <select required name="{{formulario.id_categoría.name}}" id="id_categoría" class="ui dropdown">
             {% for choice in formulario.id_categoría.field.choices %}
-            <option value="{{ choice.0 }}"{% if choice.0 == formulario.id_categoría.value %} selected {% endif %}>{{ choice.1 }}</option>
+            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
             {% endfor %}
         </select>
     </div>

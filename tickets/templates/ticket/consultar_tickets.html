@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Consulta de tickets {% endblock %}
+{% block content %}
+
+<!-- Nombre de la página en bandera azul -->
+<div class="ui blue ribbon label"><h3>Consultar Tickets</h3></div>
+<span></span>
+<p></p>
+<!-- End nombre de la página en bandera azul -->
+
+<!-- Mensaje de error en caso de que hubiera -->
+{% if mensaje %}
+<label for="{{mensaje}}">{{mensaje}}</label>
+{% endif %}
+<!-- End mensaje de error -->
+
+<!-- Tabla con todos los tickets existentes -->
+<table class="ui blue table">
+    <thead>
+        <tr>
+            <th>descripción</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Tiempo de resolución</th>
+            <th>Documentos adicionales</th>
+            <th>Prioridad</th>
+            <th>Categoría</th>
+            <th>Subcategoría</th>
+            <th>Estado</th>
+            <th>Consultar</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ticket in tickets %}
+        <tr>
+            <td>{{ticket.descripción}}</td>
+            <td>{{ticket.fecha_inicio}}</td>
+            <td>{{ticket.fecha_fin}}</td>
+            <td>{{ticket.tiempo_resolución}}</td>
+            <td>{{ticket.documentos_adicionales}}</td>
+            <td>{{ticket.id_prioridad}}</td>
+            <td>{{ticket.id_categoría}}</td>
+            <td>{{ticket.id_subcategoría}}</td>
+            <td>{{ticket.estado}}</td>
+            <td><a class="ui blue fluid icon button" href="{% url 'Detalle ticket' ticket.id_ticket %}"><i class="eye icon"></i></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<!-- End tabla de tickets -->
+
+{% endblock %}
