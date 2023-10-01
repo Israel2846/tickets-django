@@ -33,6 +33,7 @@ class UsuarioManager(BaseUserManager):
             rol = 1,
             password = password,
         )
+
         usuario.usuario_administrador = True
         usuario.save()
         return usuario
@@ -43,7 +44,7 @@ class Usuario(AbstractBaseUser):
         (2, 'Soporte'),
         (3, 'Usuario'),
     )
-    nombres_usuario = models.CharField('Nombre(s)', max_length=200, blank=True, null=True)
+    nombres_usuario = models.CharField('Nombre(s)', max_length=200)
     appat_usuario = models.CharField('Apellido paterno', max_length=50)
     apmat_usuario = models.CharField('Apellido materno', max_length=50)
     num_empleado = models.IntegerField('Número de empleado', unique=True)

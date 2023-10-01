@@ -10,16 +10,50 @@
 <!-- Formulario crear usuario -->
 <form method="post" class="ui fluid form">
     {% csrf_token %}
-    <div class="three fields">
-        <div class="field">
-            {{ formulario.nombres }}
-        </div>
-        <div class="field">
-            {{ formulario. }}
-        </div>
-        <div class="field"></div>
+    <div class="field">
+        {{ formulario.nombres_usuario.label }}
+        {{ formulario.nombres_usuario }}
     </div>
-    {{ formulario }}
+    <div class="two fields">
+        <div class="field">
+            {{ formulario.appat_usuario.label }}
+            {{ formulario.appat_usuario }}
+        </div>
+        <div class="field">
+            {{ formulario.apmat_usuario.label }}
+            {{ formulario.apmat_usuario }}
+        </div>
+    </div>
+    <div class="four fields">
+        <div class="field">
+            {{ formulario.num_empleado.label }}
+            {{ formulario.num_empleado }}
+        </div>
+        <div class="field">
+            {{ formulario.num_tel.label }}
+            {{ formulario.num_tel }}
+        </div>
+        <div class="field">
+            {{ formulario.email.label }}
+            {{ formulario.email }}
+        </div>
+        <div class="field">
+            {{ formulario.rol.label }}
+            {{ formulario.rol }}
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            {{ formulario.password1.label }}
+            {{ formulario.password1 }}
+        </div>
+        <div class="field">
+            {{ formulario.password2.label }}
+            {{ formulario.password2 }}
+        </div>
+    </div>
+    <p></p>
+    <button class="ui fluid blue button">Enviar</button>
 </form>
 <!-- End formulario crear usuario -->
 {% endblock %}
