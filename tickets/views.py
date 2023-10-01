@@ -5,20 +5,25 @@ from django.contrib.auth import login, authenticate
 
 # Create your views here.
 def inicio_sesion(request):
+    mensaje = None
     if request.POST:
         print(request.POST)
         num_empleado = request.POST['num_empleado']
         password = request.POST['password']
 
-        usuario = authenticate(request, num_empleado = num_empleado, password = password)
+        try:
+            usuario = authenticate(request, num_empleado = num_empleado, password = password)
 
-        if usuario is not None:
-            login(request, usuario)
-            return redirect('Inicio')
-        else:
-            return HttpResponse('Credenciales incorrectas')
-        
-    return render(request, 'login.html')
+            if usuario is not None:
+                login(request, usuario)
+                return redirect('Inicio')
+            else:
+                return HttpResponse('Credenciales incorrectas')
+            
+        except Exception as e:
+            mensaje = str(e)
+            
+    return render(request, 'login.html', {'mensaje' : mensaje})
 
 
 def index(request):
