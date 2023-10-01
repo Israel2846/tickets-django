@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from .forms import *
 from django.http import JsonResponse
+from django.contrib.auth import login
 
 # Create your views here.
 def index(request):
@@ -8,6 +9,20 @@ def index(request):
 
 
 def usuario(request):
+    if request.POST:
+        if request.POST['password1'] == request.POST['password2']:
+            Usuario.objects.create_user(
+                nombres_usuario = request.POST['nombres_usuario'],
+                appat_usuario = request.POST['appat_usuario'],
+                apmat_usuario = request.POST['apmat_usuario'],
+                num_empleado = request.POST['num_empleado'], 
+                num_tel = request.POST['num_tel'], 
+                email = request.POST['email'], 
+                rol = request.POST['rol'], 
+                password = request.POST['password1']
+            )
+            return redirect('Inicio')
+        return HttpResponse('Las contraseñas no coinciden')
     return render(request, 'usuario/index.html', {'formulario' : UsuarioForm})
 
 
