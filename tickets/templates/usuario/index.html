@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Crear cuenta{% endblock %}
+{% block content %}
+<!-- Start nombre de página en bandera azul -->
+<div class="ui blue ribbon label"><h3>Crear Cuenta</h3></div>
+<span></span>
+<p></p>
+<!-- End nombre de página en bandera azul -->
+
+<!-- Formulario crear usuario -->
+<form method="post" class="ui fluid form">
+    {% csrf_token %}
+    {{ formulario }}
+</form>
+<!-- End formulario crear usuario -->
+{% endblock %}

@@ -7,6 +7,10 @@ def index(request):
     return render(request, 'base.html')
 
 
+def usuario(request):
+    return render(request, 'usuario/index.html', {'formulario' : UsuarioForm})
+
+
 def categoría(request, id = None):
     mensaje = None
     if id:

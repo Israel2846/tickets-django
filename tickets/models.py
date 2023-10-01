@@ -4,27 +4,34 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Create your models here.
 class UsuarioManager(BaseUserManager):
-    def create_user(self, email, nombre_usuario, nombres, apellidos, password = None):
+    def create_user(self, nombres, appat_usuario, apmat_usuario, num_empleado, num_tel, email, rol = None, password = None):
         if not email:
             raise ValueError('El usuario debe tener un correo electrónico')
         
         usuario = self.model(
-            nombre_usuario = nombre_usuario,
-            email = self.normalize_email(email), 
-            nombres = nombres, 
-            apellidos = apellidos
+            nombres = nombres,
+            appat_usuario = appat_usuario,
+            apmat_usuario = apmat_usuario,
+            num_empleado = num_empleado,
+            num_tel = num_tel,
+            email = self.normalize_email(email),
+            rol = rol
         )
 
         usuario.set_password(password)
         usuario.save()
         return usuario
     
-    def create_superuser(self, email, nombre_usuario, nombres, apellidos, password):
+    def create_superuser(self, nombres, appat_usuario, apmat_usuario, num_empleado, num_tel, email, password):
         usuario = self.create_user(
-            email, 
-            nombre_usuario = nombre_usuario,
-            nombres = nombres, 
-            apellidos = apellidos
+            nombres = nombres,
+            appat_usuario = appat_usuario,
+            apmat_usuario = apmat_usuario,
+            num_empleado = num_empleado,
+            num_tel = num_tel,
+            email = email, 
+            rol = 1,
+            password = password,
         )
         usuario.usuario_administrador = True
         usuario.save()
@@ -32,19 +39,26 @@ class UsuarioManager(BaseUserManager):
 
 
 class Usuario(AbstractBaseUser):
-    nombre_usuario = models.CharField('Nombre de usuario', unique=True, max_length=100)
-    email = models.EmailField('Correo electrónico', unique=True, max_length=254)
+    OPCIONES_ROL = (
+        (2, 'Soporte'),
+        (3, 'Usuario'),
+    )
     nombres = models.CharField('Nombre(s)', max_length=200, blank=True, null=True)
-    apellidos = models.CharField('Apellidos', max_length=200, blank=True, null=True)
+    appat_usuario = models.CharField('Apellido paterno', max_length=50)
+    apmat_usuario = models.CharField('Apellido materno', max_length=50)
+    num_empleado = models.IntegerField('Número de empleado', unique=True)
+    num_tel = models.BigIntegerField('Número telefónico')
+    email = models.EmailField('Correo electrónico', unique=True, max_length=254)
+    rol = models.IntegerField('Rol', choices=OPCIONES_ROL)
     usuario_activo = models.BooleanField(default=True)
     usuario_administrador = models.BooleanField(default=False)
     objects = UsuarioManager()
 
-    USERNAME_FIELD = 'nombre_usuario'
-    REQUIRED_FIELDS = ['email', 'nombres', 'apellidos']
+    USERNAME_FIELD = 'num_empleado'
+    REQUIRED_FIELDS = ['nombres', 'appat_usuario', 'apmat_usuario', 'num_tel', 'email']
 
     def __str__(self):
-        return f'Usuario {self.nombres}, {self.apellidos}'
+        return f'Usuario: {self.nombres} {self.appat_usuario} {self.apmat_usuario}'
     
     def has_perm(self,perm,obj = None):
         return True
