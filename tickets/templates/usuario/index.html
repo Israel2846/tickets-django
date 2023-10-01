@@ -10,6 +10,15 @@
 <!-- Formulario crear usuario -->
 <form method="post" class="ui fluid form">
     {% csrf_token %}
+    <div class="three fields">
+        <div class="field">
+            {{ formulario.nombres }}
+        </div>
+        <div class="field">
+            {{ formulario. }}
+        </div>
+        <div class="field"></div>
+    </div>
     {{ formulario }}
 </form>
 <!-- End formulario crear usuario -->

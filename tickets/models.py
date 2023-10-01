@@ -4,12 +4,12 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Create your models here.
 class UsuarioManager(BaseUserManager):
-    def create_user(self, nombres, appat_usuario, apmat_usuario, num_empleado, num_tel, email, rol = None, password = None):
+    def create_user(self, nombres_usuario, appat_usuario, apmat_usuario, num_empleado, num_tel, email, rol = None, password = None):
         if not email:
             raise ValueError('El usuario debe tener un correo electrónico')
         
         usuario = self.model(
-            nombres = nombres,
+            nombres_usuario = nombres_usuario,
             appat_usuario = appat_usuario,
             apmat_usuario = apmat_usuario,
             num_empleado = num_empleado,
@@ -22,9 +22,9 @@ class UsuarioManager(BaseUserManager):
         usuario.save()
         return usuario
     
-    def create_superuser(self, nombres, appat_usuario, apmat_usuario, num_empleado, num_tel, email, password):
+    def create_superuser(self, nombres_usuario, appat_usuario, apmat_usuario, num_empleado, num_tel, email, password):
         usuario = self.create_user(
-            nombres = nombres,
+            nombres_usuario = nombres_usuario,
             appat_usuario = appat_usuario,
             apmat_usuario = apmat_usuario,
             num_empleado = num_empleado,
@@ -43,7 +43,7 @@ class Usuario(AbstractBaseUser):
         (2, 'Soporte'),
         (3, 'Usuario'),
     )
-    nombres = models.CharField('Nombre(s)', max_length=200, blank=True, null=True)
+    nombres_usuario = models.CharField('Nombre(s)', max_length=200, blank=True, null=True)
     appat_usuario = models.CharField('Apellido paterno', max_length=50)
     apmat_usuario = models.CharField('Apellido materno', max_length=50)
     num_empleado = models.IntegerField('Número de empleado', unique=True)
@@ -55,10 +55,10 @@ class Usuario(AbstractBaseUser):
     objects = UsuarioManager()
 
     USERNAME_FIELD = 'num_empleado'
-    REQUIRED_FIELDS = ['nombres', 'appat_usuario', 'apmat_usuario', 'num_tel', 'email']
+    REQUIRED_FIELDS = ['nombres_usuario', 'appat_usuario', 'apmat_usuario', 'num_tel', 'email']
 
     def __str__(self):
-        return f'Usuario: {self.nombres} {self.appat_usuario} {self.apmat_usuario}'
+        return f'Usuario: {self.nombres_usuario} {self.appat_usuario} {self.apmat_usuario}'
     
     def has_perm(self,perm,obj = None):
         return True

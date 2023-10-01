@@ -5,7 +5,7 @@ from .models import *
 class UsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
-        fields = ['nombres', 'appat_usuario', 'apmat_usuario', 'num_empleado', 'num_tel', 'email', 'rol',]
+        fields = ['nombres_usuario', 'appat_usuario', 'apmat_usuario', 'num_empleado', 'num_tel', 'email', 'rol',]
 
 
 class CategoríaForm(forms.ModelForm):
