@@ -1,8 +1,36 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Create your models here.
+class UsuarioManager(BaseUserManager):
+    def create_user(self, email, nombre_usuario, nombres, apellidos, password = None):
+        if not email:
+            raise ValueError('El usuario debe tener un correo electrónico')
+        
+        usuario = self.model(
+            nombre_usuario = nombre_usuario,
+            email = self.normalize_email(email), 
+            nombres = nombres, 
+            apellidos = apellidos
+        )
+
+        usuario.set_password(password)
+        usuario.save()
+        return usuario
+    
+    def create_superuser(self, email, nombre_usuario, nombres, apellidos, password):
+        usuario = self.create_user(
+            email, 
+            nombre_usuario = nombre_usuario,
+            nombres = nombres, 
+            apellidos = apellidos
+        )
+        usuario.usuario_administrador = True
+        usuario.save()
+        return usuario
+
+
 class Usuario(AbstractBaseUser):
     nombre_usuario = models.CharField('Nombre de usuario', unique=True, max_length=100)
     email = models.EmailField('Correo electrónico', unique=True, max_length=254)
@@ -10,6 +38,7 @@ class Usuario(AbstractBaseUser):
     apellidos = models.CharField('Apellidos', max_length=200, blank=True, null=True)
     usuario_activo = models.BooleanField(default=True)
     usuario_administrador = models.BooleanField(default=False)
+    objects = UsuarioManager()
 
     USERNAME_FIELD = 'nombre_usuario'
     REQUIRED_FIELDS = ['email', 'nombres', 'apellidos']

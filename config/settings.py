@@ -12,9 +12,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import pymysql
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Utiliza el motor de BD PyMySQl
+pymysql.install_as_MySQLdb()
 
 
 # Quick-start development settings - unsuitable for production
@@ -81,11 +85,16 @@ DATABASES = {
         'NAME': 'tickets_django',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': 'localhost',  # O la dirección IP del servidor MySQL
-        'PORT': '3306',       # El puerto por defecto de MySQL es 3306
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8mb4',
+        },
     }
 }
 
+AUTH_USER_MODEL = 'tickets.Usuario'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
