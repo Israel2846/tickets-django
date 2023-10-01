@@ -1,9 +1,26 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .forms import *
 from django.http import JsonResponse
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 
 # Create your views here.
+def inicio_sesion(request):
+    if request.POST:
+        print(request.POST)
+        num_empleado = request.POST['num_empleado']
+        password = request.POST['password']
+
+        usuario = authenticate(request, num_empleado = num_empleado, password = password)
+
+        if usuario is not None:
+            login(request, usuario)
+            return redirect('Inicio')
+        else:
+            return HttpResponse('Credenciales incorrectas')
+        
+    return render(request, 'login.html')
+
+
 def index(request):
     return render(request, 'base.html')
 
