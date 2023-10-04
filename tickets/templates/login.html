@@ -14,7 +14,9 @@
     <!-- End encabezado -->
 
     <!-- Start mensaje de error si es que existe -->
+    {% if mensaje %}
     <label for="{{ mensaje }}">{{ mensaje }}</label>
+    {% endif %}
     <!-- End mensaje de error si es que existe -->
 
     <!-- Start formulario de inicio de sesión -->

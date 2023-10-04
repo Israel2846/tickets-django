@@ -37,21 +37,33 @@ class CategoríaForm(forms.ModelForm):
     class Meta:
         model = Categoría
         fields = ['nombre_cat']
+        widgets = {
+            'nombre_cat' : forms.TextInput(attrs={'placeholder' : 'Escriba aquí el nombre de la categoría'})
+        }
 
 
 class SubCategoríaForm(forms.ModelForm):
     class Meta:
         model = SubCategoría
         fields = ['id_categoría', 'nombre_subCat']
+        widgets = {
+            'nombre_subCat' : forms.TextInput(attrs={'placeholder' : 'Escriba aquí el nombre de la subcategoría'})
+        }
 
 
 class PrioridadForm(forms.ModelForm):
     class Meta:
         model = Prioridad
         fields = ['nombre_prioridad']
+        widgets = {
+            'nombre_prioridad' : forms.TextInput(attrs={'placeholder' : 'Escriba aquí el nombre de la prioridad'})
+        }
 
 
 class TicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
         fields = ['id_prioridad', 'documentos_adicionales', 'descripción', 'id_categoría', 'id_subcategoría']
+        widgets = {
+            'nombre_prioridad' : forms.TextInput(attrs={'placeholder' : 'Escriba aquí el nombre de la prioridad'})
+        }
