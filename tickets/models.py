@@ -104,6 +104,7 @@ class Ticket(models.Model):
         (3, 'Completado'),
         (4, 'Pausado'),
     )
+    usuario_creador = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     id_ticket = models.AutoField(verbose_name='Id de ticket', primary_key=True)
     id_categoría = models.ForeignKey(Categoría, on_delete=models.CASCADE, verbose_name='Categoría')
     id_subcategoría = models.ForeignKey(SubCategoría, on_delete=models.CASCADE, verbose_name='Subcategoría')
