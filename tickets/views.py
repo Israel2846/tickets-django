@@ -10,7 +10,6 @@ def inicio_sesion(request):
     mensaje = None
 
     if request.POST:
-        print(request.POST)
         num_empleado = request.POST['num_empleado']
         password = request.POST['password']
 
@@ -196,7 +195,7 @@ def prioridad(request, id=None):
 
 def ticket(request, id=None):
     mensaje = None
-    
+
     if id:
         pass
 
