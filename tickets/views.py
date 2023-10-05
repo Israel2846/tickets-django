@@ -21,7 +21,7 @@ def inicio_sesion(request):
                 login(request, usuario)
                 return redirect('Inicio')
             else:
-                return HttpResponse('Credenciales incorrectas')
+                mensaje = 'Credenciales incorrectas'
 
         except Exception as e:
             mensaje = str(e)

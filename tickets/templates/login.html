@@ -13,14 +13,14 @@
     <div class="ui secondary menu"></div>
     <!-- End encabezado -->
 
-    <!-- Start mensaje de error si es que existe -->
-    {% if mensaje %}
-    <label for="{{ mensaje }}">{{ mensaje }}</label>
-    {% endif %}
-    <!-- End mensaje de error si es que existe -->
-
-    <!-- Start formulario de inicio de sesión -->
     <div class="ui segment container">
+        <!-- Start mensaje de error si es que existe -->
+        {% if mensaje %}
+        <label for="{{ mensaje }}" style="color: red;">{{ mensaje }}</label>
+        {% endif %}
+        <!-- End mensaje de error si es que existe -->
+
+        <!-- Start formulario de inicio de sesión -->
         <form method="post" class="ui fluid form">
             {% csrf_token %}
             <div class="field">
@@ -36,7 +36,7 @@
                 <button type="submit" class="ui blue button">Iniciar sesión</button>
             </div>
         </form>
+        <!-- End formulario de inicio de sesión -->
     </div>
-    <!-- End formulario de inicio de sesión -->
 </body>
 </html>
