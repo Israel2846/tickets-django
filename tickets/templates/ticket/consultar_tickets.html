@@ -36,21 +36,42 @@
         <tr>
             <td>{{ticket.descripción}}</td>
             <td>{{ticket.fecha_inicio}}</td>
+
+            {% if ticket.fecha_fin is None %}
+            <td style="text-align: center;">
+                <div class="ui red circular icon button">
+                    <i class="exclamation icon"></i>
+                </div>
+            </td>
+            {% else %}
             <td>{{ticket.fecha_fin}}</td>
-            <td>{{ticket.tiempo_resolución}}</td>
+            {% endif %}
+
+            {% if ticket.tiempo_resolucion is None %}
+            <td style="text-align: center;">
+                <div class="ui red circular icon button">
+                    <i class="exclamation icon"></i>
+                </div>
+            </td>
+            {% else %}
+            <td>{{ticket.tiempo_resolucion}}</td>
+            {% endif %}
+
             <td>{{ticket.documentos_adicionales}}</td>
             <td>{{ticket.id_prioridad}}</td>
             <td>{{ticket.id_categoría}}</td>
             <td>{{ticket.id_subcategoría}}</td>
+
             {% if ticket.estado == 1 %}
-            <td><div class="ui green button">Abierto</div></td>
+            <td><div class="ui green circular button">Abierto</div></td>
             {% elif ticket.estado == 2 %}
-            <td>En Progreso</td>
+            <div class="ui yellow circular button">En progreso</div>
             {% elif ticket.estado == 3 %}
-            <td>Completado</td>
+            <div class="ui blue circular button">Completado</div>
             {% elif ticket.estado == 4 %}
-            <td>Pausado</td>
+            <div class="ui purple circular button">Pausado</div>
             {% endif %}
+
             <td>
                 <a class="ui animated fade blue button" tabindex="0" href="{% url 'Detalle ticket' ticket.id_ticket %}">
                     <div class="hidden content">Ver</div>
