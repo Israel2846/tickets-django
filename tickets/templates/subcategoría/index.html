@@ -51,7 +51,12 @@
                     <td>{{subcategoría.nombre_subCat}}</td>
                     <td>{{subcategoría.id_categoría.nombre_cat}}</td>
                     <td>
-                        <a class="ui blue button" href="{% url 'Editar/Eliminar subcategoría' subcategoría.id_subcategoría %}">Seleccionar</i></a>
+                        <a class="ui animated fade blue button" href="{% url 'Editar/Eliminar subcategoría' subcategoría.id_subcategoría %}">
+                            <div class="hidden content">Ver</div>
+                            <div class="visible content">
+                                <i class="eye icon"></i>
+                            </div>
+                        </a>
                     </td>
                 </tr>
                 {% endfor %}

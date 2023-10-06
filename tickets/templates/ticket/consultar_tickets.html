@@ -43,7 +43,7 @@
             <td>{{ticket.id_categoría}}</td>
             <td>{{ticket.id_subcategoría}}</td>
             {% if ticket.estado == 1 %}
-            <td>Abierto</td>
+            <td><div class="ui green button">Abierto</div></td>
             {% elif ticket.estado == 2 %}
             <td>En Progreso</td>
             {% elif ticket.estado == 3 %}
@@ -51,7 +51,14 @@
             {% elif ticket.estado == 4 %}
             <td>Pausado</td>
             {% endif %}
-            <td><a class="ui blue fluid icon button" href="{% url 'Detalle ticket' ticket.id_ticket %}"><i class="eye icon"></i></a></td>
+            <td>
+                <a class="ui animated fade blue button" tabindex="0" href="{% url 'Detalle ticket' ticket.id_ticket %}">
+                    <div class="hidden content">Ver</div>
+                    <div class="visible content">
+                        <i class="eye icon"></i>
+                    </div>
+                </a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>

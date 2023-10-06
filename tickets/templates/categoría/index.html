@@ -38,7 +38,12 @@
                     <td>{{categoría.id_categoría}}</td>
                     <td>{{categoría.nombre_cat}}</td>
                     <td>
-                        <a class="ui blue button" href="{% url 'Editar/Eliminar categoría' categoría.id_categoría %}"">Seleccionar</i></a>
+                        <a class="ui animated fade blue button" href="{% url 'Editar/Eliminar categoría' categoría.id_categoría %}">
+                            <div class="hidden content">Ver</div>
+                            <div class="visible content">
+                                <i class="eye icon"></i>
+                            </div>
+                        </a>
                     </td>
                 </tr>
                 {% endfor %}
