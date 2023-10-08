@@ -3,9 +3,8 @@ from .forms import *
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate, logout
 
+
 # Create your views here.
-
-
 def inicio_sesion(request):
 
     mensaje = None
