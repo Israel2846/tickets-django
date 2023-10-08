@@ -4,9 +4,8 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Create your models here.
 class UsuarioManager(BaseUserManager):
-
     def create_user(self, nombres_usuario, appat_usuario, apmat_usuario, num_empleado, num_tel, email, rol = None, password = None):
-
+        
         if not email:
             raise ValueError('El usuario debe tener un correo electrónico')
         
@@ -45,7 +44,6 @@ class UsuarioManager(BaseUserManager):
 
 
 class Usuario(AbstractBaseUser):
-
     OPCIONES_ROL = (
         (2, 'Soporte'),
         (3, 'Usuario'),
@@ -80,7 +78,6 @@ class Usuario(AbstractBaseUser):
     
 
 class Categoría(models.Model):
-
     id_categoría = models.AutoField(verbose_name='Id categoría', primary_key=True)
     nombre_cat = models.CharField(verbose_name='Nombre de categoría', max_length=50)
 
@@ -89,7 +86,6 @@ class Categoría(models.Model):
 
 
 class SubCategoría(models.Model):
-
     id_subcategoría = models.AutoField(verbose_name='Id subcategoría', primary_key=True)
     id_categoría = models.ForeignKey(Categoría, on_delete=models.CASCADE)
     nombre_subCat = models.CharField(verbose_name='Nombre de subcategoría', max_length=50)
@@ -107,7 +103,6 @@ class Prioridad(models.Model):
 
 
 class Ticket(models.Model):
-
     ESTADO_CHOICES = (
         (1, 'Abierto'),
         (2, 'En Progreso'),
@@ -128,9 +123,7 @@ class Ticket(models.Model):
     estado = models.IntegerField(verbose_name='Estado', choices=ESTADO_CHOICES, default=1)
 
     def cerrar_tarea(self):
-
-        if self.estado != 3:
-            
+        if self.estado != 3:            
             self.estado = 3
             self.fecha_fin = timezone.now()
             self.duracion = self.fecha_fin - self.fecha_inicio  # Calcula la duración

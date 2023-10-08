@@ -38,12 +38,12 @@
                     <td>{{categoría.id_categoría}}</td>
                     <td>{{categoría.nombre_cat}}</td>
                     <td>
-                        <a class="ui animated fade blue button" href="{% url 'Editar/Eliminar categoría' categoría.id_categoría %}">
+                        <button class="ui animated fade blue button" id="btnVer">
                             <div class="hidden content">Ver</div>
                             <div class="visible content">
                                 <i class="eye icon"></i>
                             </div>
-                        </a>
+                        </button>
                     </td>
                 </tr>
                 {% endfor %}
@@ -51,5 +51,9 @@
         </table>        
     </div>
 </div>
+
+{% include './modal.html' %}
+
+<script src="{% static 'js/categoría.js' %}"></script>
 
 {% endblock %}

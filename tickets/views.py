@@ -6,54 +6,43 @@ from django.contrib.auth import login, authenticate, logout
 
 # Create your views here.
 def inicio_sesion(request):
-
     mensaje = None
 
     if request.POST:
-
         num_empleado = request.POST['num_empleado']
         password = request.POST['password']
 
         try:
-
             usuario = authenticate(
                 request, num_empleado=num_empleado, password=password)
 
             if usuario is not None:
-
                 login(request, usuario)
-
                 return redirect('Inicio')
-
+            
             else:
-
                 mensaje = 'Credenciales incorrectas'
 
         except Exception as e:
-
             mensaje = str(e)
 
     return render(request, 'login.html', {'mensaje': mensaje})
 
 
 def cerrar_sesion(request):
-
     logout(request)
-
     return redirect('Login')
 
 
 def index(request):
-
     return render(request, 'base.html')
 
 
 def usuario(request):
-
     if request.POST:
 
         if request.POST['password1'] == request.POST['password2']:
-
+            
             Usuario.objects.create_user(
                 nombres_usuario=request.POST['nombres_usuario'],
                 appat_usuario=request.POST['appat_usuario'],
@@ -73,121 +62,92 @@ def usuario(request):
 
 
 def categoría(request, id=None):
-
     mensaje = None
+    categorías = Categoría.objects.all()
 
     if id:
-
         categoría = Categoría.objects.get(pk=id)
         formulario = CategoríaForm(instance=categoría)
 
-        if request.POST:
-
+        if request.POST:            
             try:
-
                 accion = request.POST.get('acciones')
                 formulario = CategoríaForm(request.POST, instance=categoría)
 
                 if accion == 'editar':
-
                     if formulario.is_valid():
-
                         formulario.save()
 
                 if accion == 'eliminar':
-
                     categoría.delete()
 
                 return redirect('Categoría')
 
             except Exception as e:
-
                 mensaje = str(e)
 
         return render(request, 'categoría/editar-eliminar.html', {'mensaje': mensaje, 'formulario': formulario, })
     
     else:
-
         if request.POST:
-
             try:
-
                 formulario = CategoríaForm(request.POST)
 
                 if formulario.is_valid():
-
                     formulario.save()
 
             except Exception as e:
-
                 mensaje = str(e)
-
-        categorías = Categoría.objects.all()
 
         return render(request, 'categoría/index.html', {'formulario': CategoríaForm, 'mensaje': mensaje, 'categorías': categorías, })
 
 
 def subcategoría(request, id=None):
-
     subcategorías = SubCategoría.objects.all()
     mensaje = None
 
     if id:
-
         subcategoría = SubCategoría.objects.get(pk=id)
 
         if request.POST:
-
             try:
-
                 accion = request.POST.get('acciones')
 
                 if accion == 'editar':
-
                     formulario = SubCategoríaForm(
                         request.POST, instance=subcategoría)
 
                     if formulario.is_valid():
-
                         formulario.save()
 
                 if accion == 'eliminar':
-
                     subcategoría.delete()
 
                 return redirect('Subcategoría')
 
             except Exception as e:
-
                 mensaje = str(e)
 
         else:
-
             formulario = SubCategoríaForm(instance=subcategoría)
 
         return render(request, 'subcategoría/editar-eliminar.html', {'mensaje': mensaje, 'formulario': formulario})
     
     else:
-
         if request.POST:
-
             try:
-
                 formulario = SubCategoríaForm(request.POST)
 
                 if formulario.is_valid():
-
                     formulario.save()
 
             except Exception as e:
-
                 mensaje = str(e)
         
         return render(request, 'subcategoría/index.html', {'formulario': SubCategoríaForm, 'mensaje': mensaje, 'subcategorías': subcategorías, })
 
 
 def cargar_subcategorías(request):
-
     id_categoría = request.GET.get('id_categoría')
 
     subcategorías = SubCategoría.objects.filter(
@@ -197,103 +157,80 @@ def cargar_subcategorías(request):
 
 
 def prioridad(request, id=None):
-
     prioridades = Prioridad.objects.all()
     mensaje = None
 
     if id:
-
         prioridad = Prioridad.objects.get(pk=id)
         formulario = PrioridadForm(instance=prioridad)
 
         if request.POST:
-
             try:
-
                 accion = request.POST.get('acciones')
 
                 if accion == 'editar':
-
                     formulario = PrioridadForm(
                         request.POST, instance=prioridad)
 
                     if formulario.is_valid():
-
                         formulario.save()
 
                 if accion == 'eliminar':
-
                     prioridad.delete()
 
                 return redirect('Prioridad')
 
             except Exception as e:
-
                 mensaje = str(e)
 
         return render(request, 'prioridad/editar-eliminar.html', {'mensaje': mensaje, 'formulario': formulario, })
     
     else:
-
         if request.POST:
-
             try:
                 formulario = PrioridadForm(request.POST)
 
                 if formulario.is_valid():
-
                     formulario.save()
 
             except Exception as e:
-
                 mensaje = str(e)
 
         return render(request, 'prioridad/index.html', {'formulario': PrioridadForm, 'mensaje': mensaje, 'prioridades': prioridades, })
 
 
 def ticket(request, id=None):
-
     mensaje = None
 
     if id:
-
         ticket = Ticket.objects.get(pk=id)
         formulario = TicketForm(instance=ticket)
 
         if request.POST:
-
             try:
-
                 formulario = TicketForm(
                     request.POST, request.FILES, instance=ticket)
                 accion = request.POST['acciones']
 
                 if accion == 'guardar':
-
                     if formulario.is_valid():
-
                         formulario.save()
 
                 if accion == 'eliminar':
-
                     ticket.delete()
 
                 return redirect('Consultar tickets')
 
             except Exception as e:
-
                 mensaje = str(e)
 
         return render(request, 'ticket/crear_ticket.html', {'formulario': formulario, 'mensaje': mensaje, 'editar': True})
 
     if request.POST:
-
         try:
-
             formulario = TicketForm(request.POST, request.FILES)
 
             if formulario.is_valid():
-
                 nueva_tarea = formulario.save(commit=False)
                 nueva_tarea.usuario_creador = request.user
                 nueva_tarea.save()
@@ -301,14 +238,11 @@ def ticket(request, id=None):
                 return redirect('Inicio')
 
         except Exception as e:
-
             mensaje = str(e)
 
     return render(request, 'ticket/crear_ticket.html', {'formulario': TicketForm, 'mensaje': mensaje})
 
 
 def consultar_tickets(request):
-
     tickets = Ticket.objects.all()
-
     return render(request, 'ticket/consultar_tickets.html', {'tickets': tickets})
