@@ -20,28 +20,42 @@
 <!-- Start formulario de envío de datos -->
 <form method="post" enctype="multipart/form-data" class="ui fluid form">
     {% csrf_token %}
+
     <div class="field">
         {{formulario.id_prioridad.label}}
         {{formulario.id_prioridad}}
     </div>
+
     <div class="field">
         {{formulario.documentos_adicionales.label}}
         {{formulario.documentos_adicionales}}
     </div>
+
     <div class="field">
         {{formulario.id_categoría.label}}
         {{formulario.id_categoría}}
     </div>
+
     <div class="field">
         {{formulario.id_subcategoría.label}}
         {{formulario.id_subcategoría}}
     </div>
+
     <div class="field">
         {{formulario.descripción.label}}
         {{formulario.descripción}}
     </div>
+
     <p></p>
-    <button type="submit" class="ui fluid blue button">Guardar</button>
+    <div class="field" style="text-align: center;">
+
+        <button type="submit" class="ui blue button" name="acciones" value="guardar">Guardar</button>
+
+        {% if editar %}
+        <button type="submit" class="ui red button" name="acciones" value="eliminar">Eliminar</button>
+        {% endif %}
+
+    </div>
 </form>
 <!-- End formulario de envío de datos -->
 

@@ -213,19 +213,26 @@ def ticket(request, id=None):
 
             try:
 
-                formulario = TicketForm(request.POST, instance=ticket)
+                formulario = TicketForm(request.POST, request.FILES, instance=ticket)
+                accion = request.POST['acciones']
 
-                if formulario.is_valid():
+                if accion == 'guardar':
 
-                    formulario.save()
+                    if formulario.is_valid():
 
-                    return redirect('Consultar tickets')
+                        formulario.save()
+                    
+                if accion == 'eliminar':
+
+                    ticket.delete()
+
+                return redirect('Consultar tickets')
 
             except Exception as e:
 
                 mensaje = str(e)
 
-        return render(request, 'ticket/crear_ticket.html', {'formulario': formulario, 'mensaje': mensaje})
+        return render(request, 'ticket/crear_ticket.html', {'formulario': formulario, 'mensaje': mensaje, 'editar': True})
 
     if request.POST:
 
