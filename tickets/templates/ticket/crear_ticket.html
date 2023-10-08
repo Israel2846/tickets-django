@@ -2,23 +2,27 @@
 {% load static %}
 {% block title %}Tickets{% endblock %}
 {% block content %}
-<div class="ui blue ribbon label"><h3>Crear Ticket</h3></div>
+
+<!-- Nombre de página en bandera azul -->
+<div class="ui blue ribbon label">
+    <h3>Crear Ticket</h3>
+</div>
 <span></span>
 <p></p>
+<!-- End nobre de la página en bandera azul -->
 
+<!-- Start mensaje de error en caso de que hubiera alguno -->
 {% if mensaje %}
 <label for="{{mensaje}}">{{mensaje}}</label>
 {% endif %}
+<!-- End mensaje de error en caso de que hubiera alguno -->
 
+<!-- Start formulario de envío de datos -->
 <form method="post" enctype="multipart/form-data" class="ui fluid form">
     {% csrf_token %}
     <div class="field">
         {{formulario.id_prioridad.label}}
-        <select name="{{formulario.id_prioridad.name}}" id="{{formulario.id_prioridad.id}}" class="ui dropdown" required>
-            {% for choice in formulario.id_prioridad.field.choices %}
-            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-            {% endfor %}
-        </select>
+        {{formulario.id_prioridad}}
     </div>
     <div class="field">
         {{formulario.documentos_adicionales.label}}
@@ -26,23 +30,21 @@
     </div>
     <div class="field">
         {{formulario.id_categoría.label}}
-        <select required name="{{formulario.id_categoría.name}}" id="id_categoría" class="ui dropdown">
-            {% for choice in formulario.id_categoría.field.choices %}
-            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-            {% endfor %}
-        </select>
+        {{formulario.id_categoría}}
     </div>
     <div class="field">
         {{formulario.id_subcategoría.label}}
-        <select name="{{formulario.id_subcategoría.name}}" required id="id_subcategoría" class="ui dropdown">
-        </select>
+        {{formulario.id_subcategoría}}
     </div>
     <div class="field">
         {{formulario.descripción.label}}
         {{formulario.descripción}}
-    </div>   
+    </div>
     <p></p>
     <button type="submit" class="ui fluid blue button">Guardar</button>
 </form>
+<!-- End formulario de envío de datos -->
+
 <script src="{% static 'js/combos.js' %}"></script>
+
 {% endblock %}

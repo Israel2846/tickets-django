@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    $('#id_categoría').on('change', function() {
+    const subcategoríaSelect = $('#id_id_subcategoría');
+    $('#id_id_categoría').on('change', function() {
         const id_categoría = $(this).val();
-        const subcategoríaSelect = $('#id_subcategoría');
         subcategoríaSelect.dropdown('clear');
         subcategoríaSelect.empty();
         console.log('Categoría seleccionada:', id_categoría);

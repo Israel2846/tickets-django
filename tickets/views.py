@@ -7,23 +7,30 @@ from django.contrib.auth import login, authenticate, logout
 
 
 def inicio_sesion(request):
+
     mensaje = None
 
     if request.POST:
+
         num_empleado = request.POST['num_empleado']
         password = request.POST['password']
 
         try:
-            usuario = authenticate(
-                request, num_empleado=num_empleado, password=password)
+
+            usuario = authenticate(request, num_empleado=num_empleado, password=password)
 
             if usuario is not None:
+
                 login(request, usuario)
+
                 return redirect('Inicio')
+            
             else:
+
                 mensaje = 'Credenciales incorrectas'
 
         except Exception as e:
+
             mensaje = str(e)
 
     return render(request, 'login.html', {'mensaje': mensaje})
@@ -70,7 +77,7 @@ def categoría(request, id=None):
                 if accion == 'editar':
                     formulario = CategoríaForm(
                         request.POST, instance=categoría)
-                    
+
                     if formulario.is_valid():
                         formulario.save()
 
@@ -78,7 +85,7 @@ def categoría(request, id=None):
                     categoría.delete()
 
                 return redirect('Categoría')
-            
+
             except Exception as e:
                 mensaje = str(e)
 
@@ -111,7 +118,7 @@ def subcategoría(request, id=None):
                 if accion == 'editar':
                     formulario = SubCategoríaForm(
                         request.POST, instance=subcategoría)
-                    
+
                     if formulario.is_valid():
                         formulario.save()
 
@@ -119,7 +126,7 @@ def subcategoría(request, id=None):
                     subcategoría.delete()
 
                 return redirect('Subcategoría')
-            
+
             except Exception as e:
                 mensaje = str(e)
 
@@ -144,10 +151,10 @@ def subcategoría(request, id=None):
 
 def cargar_subcategorías(request):
     id_categoría = request.GET.get('id_categoría')
-    
+
     subcategorías = SubCategoría.objects.filter(
         id_categoría=id_categoría).values('nombre_subCat', 'id_subcategoría')
-    
+
     return JsonResponse(list(subcategorías), safe=False)
 
 
@@ -165,7 +172,7 @@ def prioridad(request, id=None):
                 if accion == 'editar':
                     formulario = PrioridadForm(
                         request.POST, instance=prioridad)
-                    
+
                     if formulario.is_valid():
                         formulario.save()
 
@@ -173,7 +180,7 @@ def prioridad(request, id=None):
                     prioridad.delete()
 
                 return redirect('Prioridad')
-            
+
             except Exception as e:
                 mensaje = str(e)
 
@@ -194,16 +201,40 @@ def prioridad(request, id=None):
 
 
 def ticket(request, id=None):
+
     mensaje = None
 
     if id:
-        pass
+
+        ticket = Ticket.objects.get(pk=id)
+        formulario = TicketForm(instance=ticket)
+
+        if request.POST:
+
+            try:
+
+                formulario = TicketForm(request.POST, instance=ticket)
+
+                if formulario.is_valid():
+
+                    formulario.save()
+
+                    return redirect('Consultar tickets')
+
+            except Exception as e:
+
+                mensaje = str(e)
+
+        return render(request, 'ticket/crear_ticket.html', {'formulario': formulario, 'mensaje': mensaje})
 
     if request.POST:
+
         try:
+
             formulario = TicketForm(request.POST, request.FILES)
 
             if formulario.is_valid():
+
                 nueva_tarea = formulario.save(commit=False)
                 nueva_tarea.usuario_creador = request.user
                 nueva_tarea.save()
@@ -211,11 +242,14 @@ def ticket(request, id=None):
                 return redirect('Inicio')
 
         except Exception as e:
+
             mensaje = str(e)
 
     return render(request, 'ticket/crear_ticket.html', {'formulario': TicketForm, 'mensaje': mensaje})
 
 
 def consultar_tickets(request):
+
     tickets = Ticket.objects.all()
+
     return render(request, 'ticket/consultar_tickets.html', {'tickets': tickets})
