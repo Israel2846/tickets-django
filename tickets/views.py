@@ -19,7 +19,7 @@ def inicio_sesion(request):
             if usuario is not None:
                 login(request, usuario)
                 return redirect('Inicio')
-            
+
             else:
                 mensaje = 'Credenciales incorrectas'
 
@@ -42,7 +42,7 @@ def usuario(request):
     if request.POST:
 
         if request.POST['password1'] == request.POST['password2']:
-            
+
             Usuario.objects.create_user(
                 nombres_usuario=request.POST['nombres_usuario'],
                 appat_usuario=request.POST['appat_usuario'],
@@ -69,7 +69,7 @@ def categoría(request, id=None):
         categoría = Categoría.objects.get(pk=id)
         formulario = CategoríaForm(instance=categoría)
 
-        if request.POST:            
+        if request.POST:
             try:
                 accion = request.POST.get('acciones')
                 formulario = CategoríaForm(request.POST, instance=categoría)
@@ -87,7 +87,7 @@ def categoría(request, id=None):
                 mensaje = str(e)
 
         return render(request, 'categoría/editar-eliminar.html', {'mensaje': mensaje, 'formulario': formulario, })
-    
+
     else:
         if request.POST:
             try:
@@ -132,7 +132,7 @@ def subcategoría(request, id=None):
             formulario = SubCategoríaForm(instance=subcategoría)
 
         return render(request, 'subcategoría/editar-eliminar.html', {'mensaje': mensaje, 'formulario': formulario})
-    
+
     else:
         if request.POST:
             try:
@@ -143,7 +143,7 @@ def subcategoría(request, id=None):
 
             except Exception as e:
                 mensaje = str(e)
-        
+
         return render(request, 'subcategoría/index.html', {'formulario': SubCategoríaForm, 'mensaje': mensaje, 'subcategorías': subcategorías, })
 
 
@@ -184,7 +184,7 @@ def prioridad(request, id=None):
                 mensaje = str(e)
 
         return render(request, 'prioridad/editar-eliminar.html', {'mensaje': mensaje, 'formulario': formulario, })
-    
+
     else:
         if request.POST:
             try:

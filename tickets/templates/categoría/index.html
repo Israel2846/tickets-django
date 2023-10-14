@@ -35,10 +35,10 @@
             <tbody>
                 {% for categoría in categorías %}
                 <tr>
-                    <td>{{categoría.id_categoría}}</td>
-                    <td>{{categoría.nombre_cat}}</td>
+                    <td>{{ categoría.id_categoría }}</td>
+                    <td>{{ categoría.nombre_cat }}</td>
                     <td>
-                        <button class="ui animated fade blue button" id="btnVer">
+                        <button class="ui animated fade blue button" id="btnVer" value="{{ categoría.id_categoría }}">
                             <div class="hidden content">Ver</div>
                             <div class="visible content">
                                 <i class="eye icon"></i>
