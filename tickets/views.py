@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .forms import *
 from django.http import JsonResponse
+from django.forms.models import model_to_dict
 from django.contrib.auth import login, authenticate, logout
 
 
@@ -61,45 +62,45 @@ def usuario(request):
     return render(request, 'usuario/index.html', {'formulario': UsuarioForm})
 
 
-def categoría(request, id=None):
+def categoría(request):
     mensaje = None
     categorías = Categoría.objects.all()
+    formulario = CategoríaForm()
 
-    if id:
-        categoría = Categoría.objects.get(pk=id)
-        formulario = CategoríaForm(instance=categoría)
-
-        if request.POST:
+    if request.POST:
+        if request.POST['id_categoría_modal']:
             try:
-                accion = request.POST.get('acciones')
-                formulario = CategoríaForm(request.POST, instance=categoría)
-
-                if accion == 'editar':
-                    if formulario.is_valid():
-                        formulario.save()
-
-                if accion == 'eliminar':
-                    categoría.delete()
+                categoría = Categoría.objects.get(
+                    pk=request.POST['id_categoría_modal'])
+                categoría.nombre_cat = request.POST['modal_nombre']
+                categoría.save()
 
                 return redirect('Categoría')
 
             except Exception as e:
                 mensaje = str(e)
 
-        return render(request, 'categoría/editar-eliminar.html', {'mensaje': mensaje, 'formulario': formulario, })
+        try:
+            formulario = CategoríaForm(request.POST)
 
-    else:
-        if request.POST:
-            try:
-                formulario = CategoríaForm(request.POST)
+            if formulario.is_valid():
+                formulario.save()
 
-                if formulario.is_valid():
-                    formulario.save()
+        except Exception as e:
+            mensaje = str(e)
 
-            except Exception as e:
-                mensaje = str(e)
+    if request.GET.get('id_categoría'):
+        try:
+            id_categoría = request.GET.get('id_categoría')
+            categoría = Categoría.objects.get(pk=id_categoría)
+            categoría_dicc = model_to_dict(categoría)
 
-        return render(request, 'categoría/index.html', {'formulario': CategoríaForm, 'mensaje': mensaje, 'categorías': categorías, })
+            return JsonResponse({"categoría": categoría_dicc})
+
+        except Exception as e:
+            mensaje = str(e)
+
+    return render(request, 'categoría/index.html', {'formulario': formulario, 'mensaje': mensaje, 'categorías': categorías, })
 
 
 def subcategoría(request, id=None):

@@ -3,14 +3,21 @@
     <div class="header">Modificar categoría</div>
     <div class="image content">
         <div class="description">
-            <form method="post">
-                {{ formulario }}
+            <form method="post" class="ui fluid form" id="form_modif">
+                {% csrf_token %}
+                {{ formulario.nombre_cat.label }}
+                <input type="text" placeholder="Escriba el nuevo nombre" name="modal_nombre" id="modal_nombre">
+                <input type="hidden" name="id_categoría_modal" id="id_categoría_modal">
             </form>
         </div>
     </div>
     <div class="actions">
-        <div class="ui red deny button">Cancelar</div>
-        <div class="ui green right labeled icon button" id="btnModificar">
+        <div class="ui black deny button">Cancelar</div>
+        <div class="ui red right labeled icon button" id="btn_eliminar">
+            Eliminar
+            <i class="trash icon"></i>
+        </div>
+        <div class="ui green right labeled icon button" id="btn_modificar">
             Aceptar
             <i class="checkmark icon"></i>
         </div>
