@@ -1,17 +1,17 @@
+// Variables y botones del template
 const btnModificar = document.getElementById('btn_modificar');
-const btnVer = document.getElementById('btn_ver');
-const idCategoría = btnVer.value;
+const btnEliminar = document.getElementById('btn_eliminar');
 const formModif = document.getElementById('form_modif');
 
-btnVer.addEventListener('click', function () {
+// Función del botón "Ver"
+function ver(id_categoría) {
     $.ajax({
         url: "categoría",
         type: "GET",
-        data: { id_categoría: idCategoría },
+        data: { id_categoría: id_categoría },
         dataType: "json",
 
         success: function (datos) {
-            console.log(datos);
             $('#modal_nombre').val(datos.categoría.nombre_cat);
             $('#id_categoría_modal').val(datos.categoría.id_categoría);
             $('.ui.modal').modal('show');
@@ -21,8 +21,16 @@ btnVer.addEventListener('click', function () {
             console.log(error.responseText);
         }
     })
+}
+
+// Función del botón "Modificar"
+btnModificar.addEventListener('click', function () {
+    $('#acciones').val('aceptar');
+    formModif.submit();
 })
 
-btnModificar.addEventListener('click', function () {
+// Función del botón "Eliminar"
+btnEliminar.addEventListener('click', function () {
+    $('#acciones').val('eliminar');
     formModif.submit();
 })

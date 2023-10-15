@@ -68,12 +68,18 @@ def categoría(request):
     formulario = CategoríaForm()
 
     if request.POST:
-        if request.POST['id_categoría_modal']:
+        if 'id_categoría_modal' in request.POST:
+            acciones = request.POST['acciones']
+            categoría = Categoría.objects.get(
+                pk=request.POST['id_categoría_modal'])
+
             try:
-                categoría = Categoría.objects.get(
-                    pk=request.POST['id_categoría_modal'])
-                categoría.nombre_cat = request.POST['modal_nombre']
-                categoría.save()
+                if acciones == 'aceptar':
+                    categoría.nombre_cat = request.POST['modal_nombre']
+                    categoría.save()
+
+                elif acciones == 'eliminar':
+                    categoría.delete()
 
                 return redirect('Categoría')
 
