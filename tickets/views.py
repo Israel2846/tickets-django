@@ -163,47 +163,32 @@ def cargar_subcategorías(request):
     return JsonResponse(list(subcategorías), safe=False)
 
 
-def prioridad(request, id=None):
+def prioridad(request):
     prioridades = Prioridad.objects.all()
     mensaje = None
+    formulario = PrioridadForm()
 
-    if id:
-        prioridad = Prioridad.objects.get(pk=id)
-        formulario = PrioridadForm(instance=prioridad)
+    if request.POST:
+        try:
+            formulario = PrioridadForm(request.POST)
 
-        if request.POST:
-            try:
-                accion = request.POST.get('acciones')
+            if formulario.is_valid():
+                formulario.save()
 
-                if accion == 'editar':
-                    formulario = PrioridadForm(
-                        request.POST, instance=prioridad)
+        except Exception as e:
+            mensaje = str(e)
 
-                    if formulario.is_valid():
-                        formulario.save()
+    if request.GET.get('id_prioridad'):
+        try:
+            prioridad = Prioridad.objects.get(pk=request.GET.get('id_prioridad'))
+            prioridad_dicc = model_to_dict(prioridad)
 
-                if accion == 'eliminar':
-                    prioridad.delete()
+            return JsonResponse({'prioridad': prioridad_dicc})
+        
+        except Exception as e:
+            mensaje = str(e)
 
-                return redirect('Prioridad')
-
-            except Exception as e:
-                mensaje = str(e)
-
-        return render(request, 'prioridad/editar-eliminar.html', {'mensaje': mensaje, 'formulario': formulario, })
-
-    else:
-        if request.POST:
-            try:
-                formulario = PrioridadForm(request.POST)
-
-                if formulario.is_valid():
-                    formulario.save()
-
-            except Exception as e:
-                mensaje = str(e)
-
-        return render(request, 'prioridad/index.html', {'formulario': PrioridadForm, 'mensaje': mensaje, 'prioridades': prioridades, })
+    return render(request, 'prioridad/index.html', {'formulario': PrioridadForm, 'mensaje': mensaje, 'prioridades': prioridades, })
 
 
 def ticket(request, id=None):

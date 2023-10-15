@@ -2,7 +2,9 @@
 {% load static %}
 {% block title %}Crear categoría{% endblock %}
 {% block content %}
-<div class="ui blue ribbon label"><h3>Crear prioridad</h3></div>
+<div class="ui blue ribbon label">
+    <h3>Crear prioridad</h3>
+</div>
 <span></span>
 <p></p>
 
@@ -18,7 +20,9 @@
 </form>
 <p></p>
 
-<div class="ui blue ribbon label"><h3>Lista de Prioridades</h3></div>
+<div class="ui blue ribbon label">
+    <h3>Lista de Prioridades</h3>
+</div>
 <span></span>
 <p></p>
 
@@ -38,18 +42,22 @@
                     <td>{{prioridad.id_prioridad}}</td>
                     <td>{{prioridad.nombre_prioridad}}</td>
                     <td>
-                        <a class="ui animated fade blue button" href="{% url 'Editar/Eliminar prioridad' prioridad.id_prioridad %}">
+                        <button class="ui animated fade blue button" onclick="ver({{prioridad.id_prioridad}})">
                             <div class="hidden content">Ver</div>
                             <div class="visible content">
                                 <i class="eye icon"></i>
                             </div>
-                        </a>
+                        </button>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
-        </table>        
+        </table>
     </div>
 </div>
+
+{% include './modal.html' %}
+
+<script src="{% static 'js/prioridad.js' %}"></script>
 
 {% endblock %}

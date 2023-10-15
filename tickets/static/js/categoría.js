@@ -4,11 +4,11 @@ const btnEliminar = document.getElementById('btn_eliminar');
 const formModif = document.getElementById('form_modif');
 
 // Función del botón "Ver"
-function ver(id_categoría) {
+function ver(idCategoría) {
     $.ajax({
         url: "categoría",
         type: "GET",
-        data: { id_categoría: id_categoría },
+        data: { id_categoría: idCategoría },
         dataType: "json",
 
         success: function (datos) {
