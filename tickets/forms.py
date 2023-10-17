@@ -48,7 +48,8 @@ class SubCategoríaForm(forms.ModelForm):
         model = SubCategoría
         fields = ['id_categoría', 'nombre_subCat']
         widgets = {
-            'nombre_subCat': forms.TextInput(attrs={'placeholder': 'Escriba aquí el nombre de la subcategoría'})
+            'nombre_subCat': forms.TextInput(attrs={'placeholder': 'Escriba aquí el nombre de la subcategoría'}),
+            'id_categoría': forms.Select(attrs={'class': 'ui dropdown', 'required': 'required'}),
         }
 
 

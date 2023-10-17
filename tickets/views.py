@@ -109,49 +109,32 @@ def categoría(request):
     return render(request, 'categoría/index.html', {'formulario': formulario, 'mensaje': mensaje, 'categorías': categorías, })
 
 
-def subcategoría(request, id=None):
+def subcategoría(request):
     subcategorías = SubCategoría.objects.all()
     mensaje = None
 
-    if id:
-        subcategoría = SubCategoría.objects.get(pk=id)
+    if request.POST:
+        try:
+            formulario = SubCategoríaForm(request.POST)
 
-        if request.POST:
-            try:
-                accion = request.POST.get('acciones')
+            if formulario.is_valid():
+                formulario.save()
 
-                if accion == 'editar':
-                    formulario = SubCategoríaForm(
-                        request.POST, instance=subcategoría)
+        except Exception as e:
+            mensaje = str(e)
 
-                    if formulario.is_valid():
-                        formulario.save()
+    if 'id_subCat' in request.GET:
+        try:
+            id_subCat = request.GET.get('id_subCat')
+            subcategoría = SubCategoría.objects.get(pk=id_subCat)
+            subcategoría_dicc = model_to_dict(subcategoría)
 
-                if accion == 'eliminar':
-                    subcategoría.delete()
+            return JsonResponse(subcategoría_dicc)
 
-                return redirect('Subcategoría')
+        except Exception as e:
+            mensaje = str(e)
 
-            except Exception as e:
-                mensaje = str(e)
-
-        else:
-            formulario = SubCategoríaForm(instance=subcategoría)
-
-        return render(request, 'subcategoría/editar-eliminar.html', {'mensaje': mensaje, 'formulario': formulario})
-
-    else:
-        if request.POST:
-            try:
-                formulario = SubCategoríaForm(request.POST)
-
-                if formulario.is_valid():
-                    formulario.save()
-
-            except Exception as e:
-                mensaje = str(e)
-
-        return render(request, 'subcategoría/index.html', {'formulario': SubCategoríaForm, 'mensaje': mensaje, 'subcategorías': subcategorías, })
+    return render(request, 'subcategoría/index.html', {'formulario': SubCategoríaForm, 'mensaje': mensaje, 'subcategorías': subcategorías, })
 
 
 def cargar_subcategorías(request):

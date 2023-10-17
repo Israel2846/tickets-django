@@ -2,37 +2,47 @@
 {% load static %}
 {% block title %}Crear subcategoría{% endblock %}
 {% block content %}
-<div class="ui blue ribbon label"><h3>Crear subcategoría</h3></div>
+
+<!-- Start nombre de página en bandera azul -->
+<div class="ui blue ribbon label">
+    <h3>Crear subcategoría</h3>
+</div>
 <span></span>
 <p></p>
+<!-- End nombre de página en bandera azul -->
 
+<!-- Start mensaje de error en caso de que hubiera alguno -->
 {% if mensaje %}
 <label for="{{mensaje}}" style="color: red;">{{mensaje}}</label>
 {% endif %}
+<!-- End mensaje de error en caso de que hubiera alguno -->
 
+<!-- Start formulario de envío de datos -->
 <form class="ui fluid form" method="post">
     {% csrf_token %}
     <div class="field">
-        {{formulario.id_categoría.label}}
-        <select name="{{formulario.id_categoría.name}}" id="selectCategoría" class="ui dropdown" required>
-            {% for choice in formulario.id_categoría.field.choices %}
-            <option value="{{choice.0}}">{{choice.1}}</option>
-            {% endfor %}
-        </select>
+        {{ formulario.id_categoría.label }}
+        {{ formulario.id_categoría }}
     </div>
     <div class="field">
-        {{formulario.nombre_subCat.label}}
-        {{formulario.nombre_subCat}}
+        {{ formulario.nombre_subCat.label }}
+        {{ formulario.nombre_subCat }}
     </div>
     <p></p>
     <button class="ui fluid blue button" type="submit">Alta</button>
 </form>
 <p></p>
+<!-- End formulario de envío de datos -->
 
-<div class="ui blue ribbon label"><h3>Lista de SubCategorías</h3></div>
+<!-- Start Nombre de la tabla en bandera azul -->
+<div class="ui blue ribbon label">
+    <h3>Lista de SubCategorías</h3>
+</div>
 <span></span>
 <p></p>
+<!-- End Nombre de la tabla en bandera azul -->
 
+<!-- Start tabla de subcategorías -->
 <div class="ui fluid form">
     <div style="overflow-x: auto; height: 300px">
         <table class="ui unstackable celled striped table">
@@ -51,18 +61,23 @@
                     <td>{{subcategoría.nombre_subCat}}</td>
                     <td>{{subcategoría.id_categoría.nombre_cat}}</td>
                     <td>
-                        <a class="ui animated fade blue button" href="{% url 'Editar/Eliminar subcategoría' subcategoría.id_subcategoría %}">
+                        <button class="ui animated fade blue button" onclick="ver({{subcategoría.id_subcategoría}})">
                             <div class="hidden content">Ver</div>
                             <div class="visible content">
                                 <i class="eye icon"></i>
                             </div>
-                        </a>
+                        </button>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
-        </table>        
+        </table>
     </div>
 </div>
+<!-- End tabla de subcategorías -->
+
+{% include './modal.html' %}
+
+<script src="{% static 'js/subcategoría.js' %}"></script>
 
 {% endblock %}

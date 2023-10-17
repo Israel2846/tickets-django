@@ -1,14 +1,20 @@
-<!-- Modal de modificación / eliminación de categoría -->
+<!-- Modal de modificación / eliminación de subcategorías -->
 <div class="ui modal">
     <i class="close icon"></i>
-    <div class="header">Modificar categoría</div>
+    <div class="header">Modificar subcategoría</div>
     <div class="image content">
         <div class="description">
             <form method="post" class="ui fluid form" id="form_modif">
                 {% csrf_token %}
-                {{ formulario.nombre_cat.label }}
-                <input type="text" placeholder="Escriba el nuevo nombre" name="modal_nombre" id="modal_nombre">
-                <input type="hidden" name="id_categoría_modal" id="id_categoría_modal">
+                <div class="field">
+                    {{ formulario.nombre_subCat.label }}
+                    <input type="text" placeholder="Escriba el nuevo nombre" name="modal_nombre" id="modal_nombre">
+                </div>
+                <div class="field">
+                    {{ formulario.id_categoría.label }}
+                    {{ formulario.id_categoría }}
+                </div>
+                <input type="hidden" name="id_subCat_modal" id="id_subCat_modal">
                 <input type="hidden" name="acciones" id="acciones" value="">
             </form>
         </div>
@@ -20,7 +26,7 @@
             <i class="trash icon"></i>
         </div>
         <div class="ui green right labeled icon button" id="btn_modificar">
-            Aceptar
+            Modificar
             <i class="checkmark icon"></i>
         </div>
     </div>
