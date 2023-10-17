@@ -169,6 +169,24 @@ def prioridad(request):
     formulario = PrioridadForm()
 
     if request.POST:
+        if 'id_prioridad_modal' in request.POST:
+            acciones = request.POST['acciones']
+            prioridad = Prioridad.objects.get(
+                pk=request.POST['id_prioridad_modal'])
+
+            try:
+                if acciones == "modificar":
+                    prioridad.nombre_prioridad = request.POST['modal_nombre']
+                    prioridad.save()
+
+                elif acciones == "eliminar":
+                    prioridad.delete()
+
+                return redirect('Prioridad')
+
+            except Exception as e:
+                mensaje = str(e)
+
         try:
             formulario = PrioridadForm(request.POST)
 
@@ -180,11 +198,12 @@ def prioridad(request):
 
     if request.GET.get('id_prioridad'):
         try:
-            prioridad = Prioridad.objects.get(pk=request.GET.get('id_prioridad'))
+            prioridad = Prioridad.objects.get(
+                pk=request.GET.get('id_prioridad'))
             prioridad_dicc = model_to_dict(prioridad)
 
             return JsonResponse({'prioridad': prioridad_dicc})
-        
+
         except Exception as e:
             mensaje = str(e)
 
